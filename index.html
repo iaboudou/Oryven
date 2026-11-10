@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mizan — Cours de l'or et de l'argent</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/main.js" defer></script>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="topbar">
+      <h1>Mizan</h1>
+      <div class="cntrls">
+        <label for="currency">Devise</label>
+        <select id="currency"></select>
+        <button id="refresh" type="button">Actualiser</button>
+      </div>
+    </header>
+
+    <!-- leading the data -->
+    <div id="status" class="status loading" role="status">
+      <span class="rotatedcircle"></span>
+      <span id="status-text">Chargement en cours…</span>
+      <button id="retry" type="button" hidden>Réessayer</button>
+    </div>
+
+    <main>
+      <!-- metals -->
+      <section>
+        <h2 id="cards-title">Cours du jour</h2>
+        <div id="cards" class="cards"></div>
+      </section>
+    </main>
+  </body>
+</html>
