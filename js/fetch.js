@@ -1,7 +1,8 @@
 // fetch the metal price from /spot (query include currency and unit)
 // fetch the previous prices from chart/ (query include symbol, range and interval)
-export async function fetchMetals() {
-    let r = await fetch("https://xaus.com/api/v1/spot?currency=MAD&unit=gram");
+export async function fetchMetals(currency) {
+  try {
+    let r = await fetch(`https://xaus.com/api/v1/spot?currency=${currency.value}&unit=gram`);
     let data = await r.json();
 
     let gold = await fetch("https://xaus.com/api/v1/chart?symbol=xau&range=5d&interval=1d");
@@ -23,8 +24,11 @@ export async function fetchMetals() {
         price: (data.silver_usd_oz * data.fx_rate) / 31.1035,
         previousPrice:
           (silverHistory.points.at(-2)?.c * data.fx_rate) / 31.1035,
-        currency: "MAD",
+        currency: currency.value,
         unit: "gram",
       },
     ];
+  }catch {
+    return null
+  }
 }

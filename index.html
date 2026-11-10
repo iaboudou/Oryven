@@ -13,7 +13,11 @@
       <h1>Oryven</h1>
       <div class="cntrls">
         <label for="currency">Devise</label>
-        <select id="currency"></select>
+        <select id="currency">
+          <option value="MAD">MAD</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+        </select>
         <button id="refresh" type="button">Actualiser</button>
       </div>
     </header>
@@ -28,7 +32,6 @@
     <main>
       <!-- metals -->
       <section>
-        <h2 id="cards-title">Cours du jour</h2>
         <div id="cards" class="cards"></div>
       </section>
     </main>

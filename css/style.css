@@ -149,3 +149,26 @@ select:disabled {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+
+/* select currency */
+
+.cntrls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cntrls select,
+.cntrls button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--bg)
+}
+
+.cntrls button {
+  font-weight: bold;
+  background: var(--text);
+  color: var(--bg);
+  cursor: pointer;
+}
