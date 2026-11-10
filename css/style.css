@@ -4,6 +4,7 @@
   --text: #2b2418;
   --blue: #0042f8;
   --primary: #ffffff;
+  --second: rgb(238, 238, 238);
   --up: #009c00;
   --down: #c0392b;
 }
@@ -17,6 +18,12 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.4;
+}
+
+main section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .topbar {
@@ -53,8 +60,7 @@ main {
   padding: 20px;
 }
 
-button,
-select {
+button, select {
   padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -65,12 +71,10 @@ select {
 button {
   cursor: pointer;
   background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
+  color: var(--bg);
 }
 
-button:disabled,
-select:disabled {
+button:disabled, select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -80,21 +84,20 @@ select:disabled {
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
+  background:var(--second);
   font-weight: 600;
 }
 
 .status.loading {
-  background: #eef2f7;
-  color: #2c4a6e;
+  color: var(--text);
 }
 
 .status.success {
-  background: #e6f4ea;
   color: var(--text);
 }
 
 .status.error {
-  background: #fdecea;
+  background: var(--bg);
   color: var(--down);
 }
 
@@ -159,16 +162,36 @@ select:disabled {
   gap: 10px;
 }
 
-.cntrls select,
-.cntrls button {
-  padding: 8px 12px;
-  border-radius: 6px;
-  background: var(--bg)
-}
 
-.cntrls button {
+.cntrls button, .chartbutton {
   font-weight: bold;
   background: var(--text);
   color: var(--bg);
   cursor: pointer;
+}
+
+/* chart */
+.history {
+  display: flex;
+  flex-direction: column;
+}
+
+#history-metal {
+  border-radius: 6px;
+  background: var(--bg);
+  cursor: pointer;
+}
+
+#bar_chart {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 12px;
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  border-radius: 10px;
+}
+
+#bar_chart text {
+  font-size: 18px;
 }

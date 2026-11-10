@@ -104,3 +104,22 @@ export function addMetalsTitle(cardsSection) {
   el.textContent = "Cours du jour";
   cardsSection.parentElement.prepend(el);
 }
+
+// the chart header
+export function chartbase() {
+  let el = document.createElement("div");
+  el.innerHTML = `
+  <section class="history">
+    <div class="cntrls">
+      <select id="history-metal">
+        <option value="xau">Or</option>
+        <option value="silver">Argent</option>
+      </select>
+      <button type="button" class="chartbutton" data-days="7">7 jours</button>
+      <button type="button" class="chartbutton" data-days="30">30 jours</button>
+    </div>
+    <svg id="bar_chart" viewBox="0 0 1500 500"></svg>
+  </section>`;
+
+  return el;
+}
