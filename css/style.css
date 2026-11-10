@@ -1,11 +1,10 @@
-
 :root {
   --bg: #faf7f0;
   --border: #e3dcc9;
   --text: #2b2418;
-  --blue: #003cff;
+  --blue: #0042f8;
   --primary: #ffffff;
-  --up: #f7bd00;
+  --up: #009c00;
   --down: #c0392b;
 }
 
@@ -91,7 +90,7 @@ select:disabled {
 
 .status.success {
   background: #e6f4ea;
-  color: var(--up);
+  color: var(--text);
 }
 
 .status.error {
@@ -106,7 +105,7 @@ select:disabled {
 .rotatedcircle {
   width: 16px;
   height: 16px;
-  border: 3px solid (var(--text));
+  border: 3px solid var(--text);
   border-right-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -116,4 +115,37 @@ select:disabled {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.card h3 {
+  margin: 0 0 6px;
+}
+
+.card p {
+  margin: 4px 0;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.unit {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
