@@ -60,7 +60,8 @@ main {
   padding: 20px;
 }
 
-button, select {
+button,
+select {
   padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -74,7 +75,8 @@ button {
   color: var(--bg);
 }
 
-button:disabled, select:disabled {
+button:disabled,
+select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -84,7 +86,7 @@ button:disabled, select:disabled {
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
-  background:var(--second);
+  background: var(--second);
   font-weight: 600;
 }
 
@@ -153,7 +155,6 @@ button:disabled, select:disabled {
   font-size: 0.9rem;
 }
 
-
 /* select currency */
 
 .cntrls {
@@ -162,8 +163,8 @@ button:disabled, select:disabled {
   gap: 10px;
 }
 
-
-.cntrls button, .chartbutton {
+.cntrls button,
+.chartbutton {
   font-weight: bold;
   background: var(--text);
   color: var(--bg);
@@ -183,15 +184,59 @@ button:disabled, select:disabled {
 }
 
 #bar_chart {
+  background: var(--bg);
+  border-bottom: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+}
+
+.container-bar-char {
   display: block;
   width: 100%;
   max-width: 900px;
   margin-top: 12px;
-  background: var(--bg);
-  border: 1px solid var(--bg);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
   border-radius: 10px;
+  position: relative;
 }
 
 #bar_chart text {
   font-size: 18px;
 }
+
+.label1,
+.label2,
+.label3,
+.label4 {
+  color: var(--text);
+  position: absolute;
+  left: 1px;
+  font-size: 10px;
+}
+
+.label1 {
+  top: calc(1.5rem + (100% - 3rem) * 0.75 - 6px);
+}
+.label2 {
+  top: calc(1.5rem + (100% - 3rem) * 0.5 - 6px);
+}
+.label3 {
+  top: calc(1.5rem + (100% - 3rem) * 0.25 - 6px);
+}
+.label4 {
+  top: 8px ;
+  left: 0.5rem;
+}
+
+.label-days7,
+.label-days6,
+.label-days5 {
+  position: absolute;
+  bottom: 0;
+  font-size: 10px;
+  color: var(--text);
+}
+
+.label-days7 { left: 75%; }
+.label-days6 { left: 50%; }
+.label-days5 { left: 25%; }

@@ -13,8 +13,8 @@
 
 1. https://xaus.com/api/v1/spot?currency=MAD&unit=gram
    - `/spot` retourne les cours actuels ou les dernières valeurs disponibles du marché.
-   - `currency=MAD` : devise en dirhams.
-   - `unit=gram` : prix par gramme.
+   - `currency=MAD` : devise (MAD, USD, EUR)
+   - `unit=gram` : prix par gramme. prix par gramme
 
 2. https://xaus.com/api/v1/chart
    - exemple de query : `symbol=xau&range=5d&interval=1d`

@@ -111,15 +111,85 @@ export function chartbase() {
   el.innerHTML = `
   <section class="history">
     <div class="cntrls">
-      <select id="history-metal">
+      <select id="history-metal" class="history-metal">
         <option value="xau">Or</option>
         <option value="silver">Argent</option>
       </select>
-      <button type="button" class="chartbutton" data-days="7">7 jours</button>
-      <button type="button" class="chartbutton" data-days="30">30 jours</button>
+      <button type="button" class="chartbutton history-7d" data-days="7">7 jours</button>
+      <button type="button" class="chartbutton history-30d" data-days="30">30 jours</button>
     </div>
-    <svg id="bar_chart" viewBox="0 0 1500 500"></svg>
+
+    <div class="container-bar-char">
+      <span class="label4"></span>
+
+      <span class="label3"> </span>
+      <span class="label2"> </span>
+      <span class="label1"> </span>
+
+      <svg id="bar_chart" viewBox="0 0 1500 500">
+      </svg>
+
+      <span class="label-days5"></span>
+      <span class="label-days6"></span>
+      <span class="label-days7"></span>
+    </div>
   </section>`;
 
   return el;
 }
+
+// render the line shart
+export function renderHistoryChart(points, days, currency) {
+  let svg = document.getElementById("bar_chart");
+  let w = 1500;
+  let h = 500;
+
+  let maxPrice = Math.max(...points.map((p) => Math.round(p.price)));
+  let label1 = document.querySelector(".label1");
+  let label2 = document.querySelector(".label2");
+  let label3 = document.querySelector(".label3");
+  let label4 = document.querySelector(".label4")
+  let label_days5 = document.querySelector(".label-days5");
+  let label_days6 = document.querySelector(".label-days6");
+  let label_days7 = document.querySelector(".label-days7");
+
+  label1.textContent = Math.floor(maxPrice * 0.25);
+  label2.textContent = Math.floor(maxPrice * 0.5);
+  label3.textContent = Math.floor(maxPrice * 0.75);
+  label4.textContent = `prix en ${currency}`
+
+  let d = 30;
+  if (days == "30d") {
+    label_days5.textContent = 10;
+    label_days6.textContent = 20;
+    label_days7.textContent = 30;
+  } else if (days == "7d") {
+    d = 7;
+    label_days5.textContent = 2;
+    label_days6.textContent = 4;
+    label_days7.textContent = 6;
+  }
+
+  
+  // calculate the exact (x, y) points will be rendred
+  let pts = [];
+  points.slice(points.length - d).forEach((p, i) => {
+    let x = w - w * ((i + 1) / d);
+    let y = h - (p.price * h) / maxPrice;
+    pts.push(`${x},${y}`);
+  });
+
+  let polyline = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "polyline",
+  );
+
+  polyline.setAttribute("points", pts.concat(" "));
+  polyline.setAttribute("stroke-width", 3);
+  polyline.setAttribute("stroke", "var(--text)");
+  polyline.setAttribute("fill", "none");
+
+  svg.append(polyline);
+}
+
+
