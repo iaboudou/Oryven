@@ -8,6 +8,7 @@ let refresh = document.querySelector("#refresh");
 
 addMetalsTitle(cards);
 
+
 (async () => {
   await fetchedAndRendered();
 })();

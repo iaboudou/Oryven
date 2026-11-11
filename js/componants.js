@@ -153,9 +153,11 @@ export function renderHistoryChart(points, days, currency) {
   let label_days6 = document.querySelector(".label-days6");
   let label_days7 = document.querySelector(".label-days7");
 
-  label1.textContent = Math.floor(maxPrice * 0.25);
-  label2.textContent = Math.floor(maxPrice * 0.5);
-  label3.textContent = Math.floor(maxPrice * 0.75);
+  
+  let fmt = (v) => (v >= 10 ? Math.floor(v) : v.toFixed(1));
+  label1.textContent = fmt(maxPrice * 0.25);
+  label2.textContent = fmt(maxPrice * 0.5);
+  label3.textContent = fmt(maxPrice * 0.75);
   label4.textContent = `prix en ${currency}`
 
   let d = 30;
