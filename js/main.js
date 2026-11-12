@@ -73,8 +73,8 @@ async function fetchedAndRendered() {
   cards.innerHTML = "";
   container.innerHTML = "";
   let fetchedmetals = await fetchMetals(currency);
-  if (!fetchedmetals) {
-    endLoadingStatus(null, false);
+  if (typeof fetchedmetals === "string") {
+    endLoadingStatus(fetchedmetals, false);
     return false;
   } else {
     //

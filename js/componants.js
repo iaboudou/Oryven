@@ -67,10 +67,20 @@ export function endLoadingStatus(metals, fetched) {
   if (!fetched) {
     status.classList.remove("success");
     status.classList.add("error");
+    let msg;
+    switch (metals) {
+      case "offline": msg = "Vous êtes hors ligne"; break;
+      case "network": msg = "Erreur de réseau"; break;
+      case "client": msg = "Erreur côté client"; break;
+      case "server": msg = "Erreur côté serveur"; break;
+      case "quota": msg = "Quota dépassé"; break;
+      case "parse": msg = "Erreur de lecture des données"; break;
+      default: msg = "Erreur de chargement des prix";
+    }
     if (statusText) {
-      statusText.textContent = "Erreur de chargement des prix";
+      statusText.textContent = msg;
     } else {
-      status.textContent = "Erreur de chargement des prix";
+      status.textContent = msg;
     }
     return;
   }
