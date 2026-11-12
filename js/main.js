@@ -77,12 +77,16 @@ let triggerEstimateListener = () => {
 
 // fetch and render metals
 async function fetchedAndRendered() {
+  refresh.disabled = true;
+  currency.disabled = true;
   startLoadingStatus();
   cards.innerHTML = "";
   container.innerHTML = "";
   let fetchedmetals = await fetchMetals(currency);
   if (typeof fetchedmetals === "string") {
     endLoadingStatus(fetchedmetals, false);
+    refresh.disabled = false;
+    currency.disabled = false;
     return false;
   } else {
     //
@@ -97,5 +101,7 @@ async function fetchedAndRendered() {
     triggerEstimateListener()
   }
   fetchedmetals.forEach((metal) => cards.append(metalCard(metal)));
+  refresh.disabled = false;
+  currency.disabled = false;
   return true;
 }

@@ -44,13 +44,39 @@ export async function fetchMetals(currency) {
 
 // fetch history points and parse the date and price
 export async function fetchHistory(symbol, days) {
-  let currency = document.querySelector("#currency").value;
+  if (!navigator.onLine) return "offline";
+  try {
+    let currency = document.querySelector("#currency").value;
 
-  let fx_rate = (await (await fetch(`https://xaus.com/api/v1/spot?currency=${currency}&unit=gram`)).json()).fx_rate;
-  let points = (await (await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${days}d&interval=1d`)).json()).points;
+    let r = await fetch(`https://xaus.com/api/v1/spot?currency=${currency}&unit=gram`);
+    if (r.status === 429) return "quota";
+    if (r.status >= 500) return "server";
+    if (r.status >= 400) return "client";
+    let valueOfCurrency;
+    try { 
+      valueOfCurrency = await r.json(); 
+    } catch { 
+      return "parse"; 
+    }
+    let fx_rate = valueOfCurrency.fx_rate;
 
-  return points.map((p) => ({
-    date: p.t,
-    price: (p.c * fx_rate) / 31.1035,
-  }));
+    let h = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${days}d&interval=1d`);
+    if (h.status === 429) return "quota";
+    if (h.status >= 500) return "server";
+    if (h.status >= 400) return "client";
+    let chartInfo;
+    try { 
+      chartInfo = await h.json(); 
+    } catch { 
+      return "parse"; 
+    }
+    let points = chartInfo.points;
+
+    return points.map((p) => ({
+      date: p.t,
+      price: (p.c * fx_rate) / 31.1035,
+    }));
+  } catch {
+    return "network";
+  }
 }
