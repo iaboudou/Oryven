@@ -8,16 +8,24 @@ let refresh = document.querySelector("#refresh");
 
 addMetalsTitle(cards);
 
+// 
 (async () => {
   await fetchedAndRendered();
 })();
 
+// rerender everything when click 'actualiser'
 refresh.addEventListener("click", async () => {
   await fetchedAndRendered();
 });
 
-currency.addEventListener("click", async () => {
+// rerender everything when the currency changed
+currency.addEventListener("change", async () => {
   await fetchedAndRendered();
+});
+
+// try to fetch  again when click button retry 
+document.querySelector("#retry").addEventListener("click", async (e) => {
+    await fetchedAndRendered();
 });
 
 // 

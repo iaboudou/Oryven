@@ -71,7 +71,7 @@ select {
 
 button {
   cursor: pointer;
-  background: var(--blue);
+  background: var(--text);
   color: var(--bg);
 }
 

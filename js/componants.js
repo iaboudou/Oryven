@@ -39,6 +39,8 @@ export function startLoadingStatus() {
 
   if (statusText) {
     statusText.textContent = "Chargement en cours…";
+    let retry = document.querySelector("#retry");
+    if (retry) retry.hidden = true;
   } else {
     let circle = document.createElement("span");
     circle.className = "rotatedcircle";
@@ -82,6 +84,8 @@ export function endLoadingStatus(metals, fetched) {
     } else {
       status.textContent = msg;
     }
+    let retry = document.querySelector("#retry");
+    if (retry) retry.hidden = false;
     return;
   }
   status.classList.remove("error");
@@ -92,6 +96,8 @@ export function endLoadingStatus(metals, fetched) {
 
   if (statusText) {
     statusText.textContent = dateFormatted;
+    let retry = document.querySelector("#retry");
+    if (retry) retry.hidden = true;
   } else {
     let circle = document.createElement("span");
     circle.className = "rotatedcircle";
