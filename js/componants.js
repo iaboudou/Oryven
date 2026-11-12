@@ -257,6 +257,10 @@ export async function estimate(currency) {
   err.textContent = "";
 
   let metals = await fetchMetals(currency);
+  if (typeof metals === "string") {
+    err.textContent = "prix indisponible, réessayez plus tard";
+    return;
+  }
   let m = metals?.find((m) => m.name === metal);
   if (!m) {
     err.textContent = "prix n'est pas valide";
