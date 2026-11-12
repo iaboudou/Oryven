@@ -23,7 +23,7 @@ body {
 main section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 }
 
 .topbar {
@@ -240,3 +240,56 @@ select:disabled {
 .label-days7 { left: 75%; }
 .label-days6 { left: 50%; }
 .label-days5 { left: 25%; }
+
+
+/* estimation */
+.estimator {
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 10rem;
+}
+
+#estimate-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#weight,
+#estimate-metal {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.field-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: var(--down);
+}
+
+#estimate-result {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+
+.btnEstimate {
+  background-color: var(--text);
+}

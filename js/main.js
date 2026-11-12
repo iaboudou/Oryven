@@ -1,5 +1,5 @@
 import { fetchHistory, fetchMetals } from "./fetch.js";
-import { startLoadingStatus, endLoadingStatus, metalCard, addMetalsTitle, chartbase, renderHistoryChart } from "./componants.js";
+import { startLoadingStatus, endLoadingStatus, metalCard, addMetalsTitle, chartbase, renderHistoryChart, estamateHTML, estimate } from "./componants.js";
 
 let container = document.querySelector(".container");
 let cards = document.querySelector("#cards");
@@ -7,7 +7,6 @@ let currency = document.querySelector("#currency");
 let refresh = document.querySelector("#refresh");
 
 addMetalsTitle(cards);
-
 
 (async () => {
   await fetchedAndRendered();
@@ -22,7 +21,7 @@ currency.addEventListener("click", async () => {
 });
 
 // 
-let triggerListeners = (()=> {
+let triggerHistoryListeners = (()=> {
   let historyMetal = document.querySelector(".history-metal");
   let history7d = document.querySelector(".history-7d");
   let history30d = document.querySelector(".history-30d");
@@ -58,9 +57,15 @@ let triggerListeners = (()=> {
     chart.innerHTML = "";
     renderHistoryChart(history, "7d", currency.value);
   });
-
-
 })
+
+
+let triggerEstimateListener = () => {
+  document.querySelector("#estimate-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    estimate(currency);
+  });
+}
 
 // fetch and render metals
 async function fetchedAndRendered() {
@@ -72,11 +77,16 @@ async function fetchedAndRendered() {
     endLoadingStatus(null, false);
     return false;
   } else {
+    //
     endLoadingStatus(fetchedmetals, true);
+    // history
     container.append(chartbase());
-    triggerListeners();
+    triggerHistoryListeners();
     let fetchedhistoory = await fetchHistory("xau", "1mo");
     renderHistoryChart(fetchedhistoory, "30d", currency.value);
+    // estimation
+    container.append(estamateHTML())
+    triggerEstimateListener()
   }
   fetchedmetals.forEach((metal) => cards.append(metalCard(metal)));
   return true;

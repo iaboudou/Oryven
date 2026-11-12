@@ -1,4 +1,7 @@
 // create and return the card element
+
+import { fetchMetals } from "./fetch.js";
+
 // calculate the diffence prix percentage between two dates (depend on the range fetched by the query)
 export function metalCard(metal) {
   let dp = metal.price - metal.previousPrice;
@@ -195,3 +198,55 @@ export function renderHistoryChart(points, days, currency) {
 }
 
 
+export function estamateHTML() {
+  let el = document.createElement("div");
+  el.innerHTML = `
+  <section class="estimator">
+    <h2>Estimateur de bijou</h2>
+
+    <form id="estimate-form">
+      <div class="field">
+        <label for="weight">Poids (grammes)</label>
+        <input id="weight" type="text"/>
+        <p id="weight-error" class="field-error"></p>
+      </div>
+      <div class="field">
+        <label for="estimate-metal">Métal</label>
+        <select id="estimate-metal">
+          <option value="Or">Or</option>
+          <option value="Argent">Argent</option>
+        </select>
+      </div>
+      <button type="submit" class="btnEstimate">Estimer</button>
+    </form>
+
+    <p id="estimate-result"></p>
+  </section>
+  `
+  return el
+}
+
+export async function estimate(currency) {
+  let weight = document.querySelector("#weight").value.trim().replace(",", ".");
+  let metal = document.querySelector("#estimate-metal").value;
+  let err = document.querySelector("#weight-error");
+  let result = document.querySelector("#estimate-result");
+
+  if (!/^\d+(\.\d+)?$/.test(weight) || Number(weight) <= 0) {
+    err.textContent = "le poids n'est pas valide";
+    result.textContent = "";
+    return;
+  }
+  err.textContent = "";
+
+  let metals = await fetchMetals(currency);
+  let m = metals?.find((m) => m.name === metal);
+  if (!m) {
+    err.textContent = "prix n'est pas valide";
+    return;
+  }
+
+  let val = Math.round(weight * m.price * 100) / 100;
+
+  result.textContent = `Valeur estimée : ${val} ${m.currency}`;
+}
