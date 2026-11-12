@@ -40,6 +40,10 @@ let triggerHistoryListeners = (()=> {
     let chart = document.getElementById("bar_chart");
   
     let history = await fetchHistory(metal, days);
+    if (typeof history === "string") {
+      endLoadingStatus(history, false);
+      return;
+    }
     chart.innerHTML = "";
     renderHistoryChart(history, `${days}d`, currency.value);
   });
@@ -52,6 +56,10 @@ let triggerHistoryListeners = (()=> {
     let metal = document.querySelector(".history-metal")?.value;
   
     let history = await fetchHistory(metal, "30");
+    if (typeof history === "string") {
+      endLoadingStatus(history, false);
+      return;
+    }
     chart.innerHTML = "";
     renderHistoryChart(history, "30d", currency.value);
   });
@@ -62,6 +70,10 @@ let triggerHistoryListeners = (()=> {
     let metal = document.querySelector(".history-metal")?.value
     let history = await fetchHistory(metal, "7");
     let chart = document.getElementById("bar_chart");
+    if (typeof history === "string") {
+      endLoadingStatus(history, false);
+      return;
+    }
     chart.innerHTML = "";
     renderHistoryChart(history, "7d", currency.value);
   });
@@ -95,7 +107,11 @@ async function fetchedAndRendered() {
     container.append(chartbase());
     triggerHistoryListeners();
     let fetchedhistoory = await fetchHistory("xau", "1mo");
-    renderHistoryChart(fetchedhistoory, "30d", currency.value);
+    if (typeof fetchedhistoory === "string") {
+      endLoadingStatus(fetchedhistoory, false);
+    } else {
+      renderHistoryChart(fetchedhistoory, "30d", currency.value);
+    }
     // estimation
     container.append(estamateHTML())
     triggerEstimateListener()
