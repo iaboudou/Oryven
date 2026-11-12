@@ -194,8 +194,9 @@ export function renderHistoryChart(points, days, currency) {
   
   // calculate the exact (x, y) points will be rendred
   let pts = [];
-  points.slice(points.length - d).forEach((p, i) => {
-    let x = w - w * ((i + 1) / d);
+  let shown = points.slice(-d);
+  shown.forEach((p, i) => {
+    let x = w - (w * i) / Math.max(shown.length - 1, 1);
     let y = h - (p.price * h) / maxPrice;
     pts.push(`${x},${y}`);
   });
@@ -205,7 +206,7 @@ export function renderHistoryChart(points, days, currency) {
     "polyline",
   );
 
-  polyline.setAttribute("points", pts.concat(" "));
+  polyline.setAttribute("points", pts.join(" "));
   polyline.setAttribute("stroke-width", 3);
   polyline.setAttribute("stroke", "var(--text)");
   polyline.setAttribute("fill", "none");

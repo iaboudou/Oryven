@@ -60,7 +60,8 @@ export async function fetchHistory(symbol, days) {
     }
     let fx_rate = valueOfCurrency.fx_rate;
 
-    let h = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${days}d&interval=1d`);
+    let range = days === "1mo" ? "1mo" : days + "d";
+    let h = await fetch(`https://xaus.com/api/v1/chart?symbol=${symbol}&range=${range}&interval=1d`);
     if (h.status === 429) return "quota";
     if (h.status >= 500) return "server";
     if (h.status >= 400) return "client";
