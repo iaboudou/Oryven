@@ -1,3 +1,8 @@
+#### Mizan
+
+page web HTML, CSS, javaScript vanilla en modules ES qui affiche les cours de l'or et de l'argent en (MAD, EUR, USD)/gramme pour la bijouterie al andalous, les données pris depuis l'API [xaus.com](https://xaus.com/api)
+
+
 #### calculation de metals (MAD/gram)
 
 - `data.silver_usd_oz` : prix de l'argent en dollars américains par once troy (USD/oz)
